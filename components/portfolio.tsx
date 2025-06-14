@@ -377,7 +377,7 @@ export default function Component() {
                 Areej Hussain
               </h3>
               <p className="text-slate-300 animate-slide-up animation-delay-200">
-                Digital Portfolioo
+                Digital Portfolio
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-6 text-sm">
