@@ -61,8 +61,6 @@ export default function Portfolio() {
       category: "Logo Variations",
       image: "images/logos.png",
       tools: ["Illustrator", "Photoshop"],
-      description:
-        "Complete brand identity with logo variations and guidelines",
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -71,8 +69,6 @@ export default function Portfolio() {
       category: "Booklets",
       image: "images/page.png",
       tools: ["InDesign", "Illustrator"],
-      description:
-        "Professional booklet layouts with modern typography and design",
       color: "from-emerald-500 to-teal-500",
     },
     {
@@ -81,7 +77,6 @@ export default function Portfolio() {
       category: "Logo Variations",
       image: "images/2.jpg",
       tools: ["Illustrator", "Canva"],
-      description: "Multiple logo concepts and variations for tech startup",
       color: "from-violet-500 to-purple-500",
     },
     {
@@ -90,7 +85,6 @@ export default function Portfolio() {
       category: "Booklets",
       image: "images/mne-2.png",
       tools: ["Canva", "Illustrator"],
-      description: "Elegant menu design with typography focus",
       color: "from-blue-500 to-indigo-500",
     },
     {
@@ -99,7 +93,6 @@ export default function Portfolio() {
       category: "Graphic Works",
       image: "images/4.jpg",
       tools: ["Canva", "Photoshop"],
-      description: "Engaging social media post designs and templates",
       color: "from-orange-500 to-red-500",
     },
   ];
