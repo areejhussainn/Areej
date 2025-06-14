@@ -1,32 +1,42 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, Linkedin, ExternalLink, ArrowDown, Grid, Layers, BookOpen, Palette } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Mail,
+  Phone,
+  Linkedin,
+  ExternalLink,
+  ArrowDown,
+  Grid,
+  Layers,
+  BookOpen,
+  Palette,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Component() {
-  const [scrollY, setScrollY] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [scrollY, setScrollY] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    const handleScroll = () => setScrollY(window.scrollY);
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   const portfolioItems = [
     {
@@ -35,7 +45,8 @@ export default function Component() {
       category: "Logo Variations",
       image: "/placeholder.svg?height=400&width=600",
       tools: ["Illustrator", "Photoshop"],
-      description: "Complete brand identity with logo variations and guidelines",
+      description:
+        "Complete brand identity with logo variations and guidelines",
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -44,7 +55,8 @@ export default function Component() {
       category: "Booklets",
       image: "/placeholder.svg?height=400&width=600",
       tools: ["InDesign", "Illustrator"],
-      description: "Professional booklet layouts with modern typography and design",
+      description:
+        "Professional booklet layouts with modern typography and design",
       color: "from-emerald-500 to-teal-500",
     },
     {
@@ -83,25 +95,35 @@ export default function Component() {
       description: "Comprehensive digital marketing graphics and banners",
       color: "from-cyan-500 to-blue-500",
     },
-  ]
+  ];
 
   const categories = [
     { name: "All", icon: Grid, count: portfolioItems.length },
     {
       name: "Logo Variations",
       icon: Layers,
-      count: portfolioItems.filter((item) => item.category === "Logo Variations").length,
+      count: portfolioItems.filter(
+        (item) => item.category === "Logo Variations"
+      ).length,
     },
     {
       name: "Graphic Works",
       icon: Palette,
-      count: portfolioItems.filter((item) => item.category === "Graphic Works").length,
+      count: portfolioItems.filter((item) => item.category === "Graphic Works")
+        .length,
     },
-    { name: "Booklets", icon: BookOpen, count: portfolioItems.filter((item) => item.category === "Booklets").length },
-  ]
+    {
+      name: "Booklets",
+      icon: BookOpen,
+      count: portfolioItems.filter((item) => item.category === "Booklets")
+        .length,
+    },
+  ];
 
   const filteredItems =
-    selectedCategory === "All" ? portfolioItems : portfolioItems.filter((item) => item.category === selectedCategory)
+    selectedCategory === "All"
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-x-hidden">
@@ -130,7 +152,10 @@ export default function Component() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section
+        id="home"
+        className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden"
+      >
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0">
           {/* Main gradient background */}
@@ -145,7 +170,9 @@ export default function Component() {
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%)
               `,
-              transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+              transform: `translate(${mousePosition.x * 0.02}px, ${
+                mousePosition.y * 0.02
+              }px)`,
             }}
           />
 
@@ -206,7 +233,8 @@ export default function Component() {
             </div>
             <div className="overflow-hidden">
               <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-12 animate-slide-up animation-delay-400">
-                Showcasing creative visual solutions across branding, digital graphics, and print design
+                Showcasing creative visual solutions across branding, digital
+                graphics, and print design
               </p>
             </div>
             <div className="flex justify-center animate-slide-up animation-delay-600">
@@ -227,26 +255,31 @@ export default function Component() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 bg-gradient-to-b from-white to-slate-50">
+      <section
+        id="portfolio"
+        className="py-20 bg-gradient-to-b from-white to-slate-50"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent mb-4 animate-slide-up">
-              Featured Work
+              Works
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto animate-slide-up animation-delay-200">
-              A curated selection of design projects showcasing creativity and technical expertise
-            </p>
+            {/* <p className="text-xl text-slate-600 max-w-3xl mx-auto animate-slide-up animation-delay-200"> */}
+            {/* A curated selection of design projects showcasing creativity and technical expertise */}
+            {/* </p> */}
           </div>
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll animation-delay-400">
             {categories.map((category, index) => {
-              const Icon = category.icon
+              const Icon = category.icon;
               return (
                 <Button
                   key={category.name}
                   onClick={() => setSelectedCategory(category.name)}
-                  variant={category.name === selectedCategory ? "default" : "outline"}
+                  variant={
+                    category.name === selectedCategory ? "default" : "outline"
+                  }
                   className={`transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-fade-in flex items-center gap-2 ${
                     category.name === selectedCategory
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
@@ -256,11 +289,14 @@ export default function Component() {
                 >
                   <Icon className="w-4 h-4" />
                   {category.name}
-                  <Badge variant="secondary" className="ml-1 text-xs bg-white/20">
+                  <Badge
+                    variant="secondary"
+                    className="ml-1 text-xs bg-white/20"
+                  >
                     {category.count}
                   </Badge>
                 </Button>
-              )
+              );
             })}
           </div>
 
@@ -293,18 +329,25 @@ export default function Component() {
                     </Button>
                   </div>
                   {/* Color accent bar */}
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}></div>
+                  <div
+                    className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}
+                  ></div>
                 </div>
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <Badge variant="secondary" className={`text-xs bg-gradient-to-r ${item.color} text-white border-0`}>
+                    <Badge
+                      variant="secondary"
+                      className={`text-xs bg-gradient-to-r ${item.color} text-white border-0`}
+                    >
                       {item.category}
                     </Badge>
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-purple-700 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-slate-600 mb-4 line-clamp-2">{item.description}</p>
+                  <p className="text-slate-600 mb-4 line-clamp-2">
+                    {item.description}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {item.tools.map((tool, toolIndex) => (
                       <Badge
@@ -333,7 +376,9 @@ export default function Component() {
               <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent animate-slide-up">
                 Areej Hussain
               </h3>
-              <p className="text-slate-300 animate-slide-up animation-delay-200">Digital Portfolio</p>
+              <p className="text-slate-300 animate-slide-up animation-delay-200">
+                Digital Portfolio
+              </p>
             </div>
             <div className="flex flex-col md:flex-row gap-6 text-sm">
               <div className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors">
@@ -356,5 +401,5 @@ export default function Component() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
