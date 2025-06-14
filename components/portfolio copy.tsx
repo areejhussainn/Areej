@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   Mail,
   Phone,
@@ -12,45 +14,27 @@ import {
   BookOpen,
   Palette,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default function Portfolio() {
+export default function Component() {
   const [scrollY, setScrollY] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({
-              ...prev,
-              [entry.target.id]: true,
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    // Observe all sections
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => observer.observe(section));
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
-      observer.disconnect();
     };
   }, []);
 
@@ -59,8 +43,7 @@ export default function Portfolio() {
       id: 1,
       title: "Brand Identity Package",
       category: "Logo Variations",
-      image:
-        "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["Illustrator", "Photoshop"],
       description:
         "Complete brand identity with logo variations and guidelines",
@@ -70,8 +53,7 @@ export default function Portfolio() {
       id: 2,
       title: "Booklet Page Samples",
       category: "Booklets",
-      image:
-        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["InDesign", "Illustrator"],
       description:
         "Professional booklet layouts with modern typography and design",
@@ -81,8 +63,7 @@ export default function Portfolio() {
       id: 3,
       title: "Social Media Graphics",
       category: "Graphic Works",
-      image:
-        "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["Canva", "Photoshop"],
       description: "Engaging social media post designs and templates",
       color: "from-orange-500 to-red-500",
@@ -91,8 +72,7 @@ export default function Portfolio() {
       id: 4,
       title: "Restaurant Menu Design",
       category: "Booklets",
-      image:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["InDesign", "Illustrator"],
       description: "Elegant menu design with typography focus",
       color: "from-blue-500 to-indigo-500",
@@ -101,8 +81,7 @@ export default function Portfolio() {
       id: 5,
       title: "Logo Design Concepts",
       category: "Logo Variations",
-      image:
-        "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["Illustrator", "Canva"],
       description: "Multiple logo concepts and variations for tech startup",
       color: "from-violet-500 to-purple-500",
@@ -111,8 +90,7 @@ export default function Portfolio() {
       id: 6,
       title: "Digital Marketing Assets",
       category: "Graphic Works",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      image: "/placeholder.svg?height=400&width=600",
       tools: ["Canva", "Photoshop"],
       description: "Comprehensive digital marketing graphics and banners",
       color: "from-cyan-500 to-blue-500",
@@ -147,13 +125,6 @@ export default function Portfolio() {
       ? portfolioItems
       : portfolioItems.filter((item) => item.category === selectedCategory);
 
-  const scrollToSection = (sectionId: any) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-x-hidden">
       {/* Navigation */}
@@ -164,20 +135,17 @@ export default function Portfolio() {
               Areej Hussain
             </div>
             <div className="hidden md:flex space-x-8">
-              <button
-                onClick={() => scrollToSection("home")}
-                className="text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 relative group animate-fade-in font-medium"
-              >
-                Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
-              </button>
-              <button
-                onClick={() => scrollToSection("portfolio")}
-                className="text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 relative group animate-fade-in font-medium"
-              >
-                Portfolio
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              {["Portfolio"].map((item, index) => (
+                <Link
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-slate-700 hover:text-purple-600 transition-all duration-300 hover:scale-105 relative group animate-fade-in font-medium"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -190,7 +158,10 @@ export default function Portfolio() {
       >
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0">
+          {/* Main gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 animate-gradient-shift"></div>
+
+          {/* Animated gradient overlay */}
           <div
             className="absolute inset-0 opacity-40 animate-gradient-flow"
             style={{
@@ -204,6 +175,8 @@ export default function Portfolio() {
               }px)`,
             }}
           />
+
+          {/* Parallax background elements */}
           <div
             className="absolute inset-0 opacity-20"
             style={{
@@ -219,11 +192,13 @@ export default function Portfolio() {
 
         {/* 3D Floating Elements */}
         <div className="absolute inset-0 pointer-events-none">
+          {/* Floating geometric shapes */}
           <div className="floating-shape floating-shape-1 absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-sm"></div>
           <div className="floating-shape floating-shape-2 absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-lg blur-sm"></div>
           <div className="floating-shape floating-shape-3 absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-sm"></div>
           <div className="floating-shape floating-shape-4 absolute bottom-20 right-10 w-18 h-18 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-lg blur-sm"></div>
 
+          {/* 3D rotating elements */}
           <div className="absolute top-1/4 left-1/4 w-32 h-32 rotating-3d">
             <div className="w-full h-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl backdrop-blur-sm border border-white/20"></div>
           </div>
@@ -233,12 +208,12 @@ export default function Portfolio() {
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-fade-in">
+          <div className="animate-hero-entrance">
             <div className="mb-8">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent mb-6 animate-slide-up hero-text-3d">
+              <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent mb-6 animate-slide-up hero-text-3d">
                 Areej Hussain
               </h1>
-              <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 animate-slide-up animation-delay-200"></div>
+              <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 animate-slide-up animation-delay-200 animate-pulse-glow"></div>
             </div>
             <div className="overflow-hidden">
               <div className="inline-flex items-center justify-center mb-8 animate-slide-up animation-delay-300">
@@ -263,16 +238,17 @@ export default function Portfolio() {
               </p>
             </div>
             <div className="flex justify-center animate-slide-up animation-delay-600">
-              <button
-                onClick={() => scrollToSection("portfolio")}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 hover:shadow-xl text-white border-0 button-3d rounded-lg font-medium"
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 hover:shadow-xl text-white border-0 button-3d"
               >
-                Explore Work
-              </button>
+                <Link href="#portfolio">Explore Work</Link>
+              </Button>
             </div>
           </div>
         </div>
 
+        {/* Enhanced Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-glow">
           <ArrowDown className="w-6 h-6 text-purple-400" />
         </div>
@@ -284,39 +260,42 @@ export default function Portfolio() {
         className="py-20 bg-gradient-to-b from-white to-slate-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent mb-4 animate-slide-up">
-              My Works
+          <div className="text-center mb-16 animate-on-scroll">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent mb-4 animate-slide-up">
+              Works
             </h2>
+            {/* <p className="text-xl text-slate-600 max-w-3xl mx-auto animate-slide-up animation-delay-200"> */}
+            {/* A curated selection of design projects showcasing creativity and technical expertise */}
+            {/* </p> */}
           </div>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll animation-delay-400">
             {categories.map((category, index) => {
               const Icon = category.icon;
               return (
-                <button
+                <Button
                   key={category.name}
                   onClick={() => setSelectedCategory(category.name)}
-                  className={`transform hover:scale-105 transition-all duration-300 hover:shadow-lg flex items-center gap-2 px-4 py-2 rounded-full font-medium ${
+                  variant={
+                    category.name === selectedCategory ? "default" : "outline"
+                  }
+                  className={`transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-fade-in flex items-center gap-2 ${
                     category.name === selectedCategory
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
-                      : "bg-white border-2 border-purple-200 text-purple-700 hover:bg-purple-50"
+                      ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
+                      : "hover:bg-purple-50 border-purple-200 text-purple-700"
                   }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <Icon className="w-4 h-4" />
                   {category.name}
-                  <span
-                    className={`ml-1 text-xs px-2 py-1 rounded-full ${
-                      category.name === selectedCategory
-                        ? "bg-white/20 text-white"
-                        : "bg-purple-100 text-purple-600"
-                    }`}
+                  <Badge
+                    variant="secondary"
+                    className="ml-1 text-xs bg-white/20"
                   >
                     {category.count}
-                  </span>
-                </button>
+                  </Badge>
+                </Button>
               );
             })}
           </div>
@@ -324,37 +303,44 @@ export default function Portfolio() {
           {/* Portfolio Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.map((item, index) => (
-              <div
+              <Card
                 key={item.id}
-                className="group overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm card-3d rounded-xl"
+                className="group overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-on-scroll border-0 bg-white/80 backdrop-blur-sm card-3d"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="relative overflow-hidden rounded-t-xl">
-                  <img
-                    src={item.image}
+                <div className="relative overflow-hidden">
+                  <Image
+                    src={item.image || "/placeholder.svg"}
                     alt={item.title}
+                    width={600}
+                    height={400}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div
                     className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-0 group-hover:opacity-20 transition-all duration-500`}
                   ></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <button className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-slate-900 hover:bg-slate-100 px-4 py-2 rounded-lg flex items-center gap-2 font-medium">
-                      <ExternalLink className="w-4 h-4" />
+                    <Button
+                      size="sm"
+                      className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-slate-900 hover:bg-slate-100"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       View Project
-                    </button>
+                    </Button>
                   </div>
+                  {/* Color accent bar */}
                   <div
                     className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}
                   ></div>
                 </div>
-                <div className="p-6">
+                <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span
-                      className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${item.color} text-white font-medium`}
+                    <Badge
+                      variant="secondary"
+                      className={`text-xs bg-gradient-to-r ${item.color} text-white border-0`}
                     >
                       {item.category}
-                    </span>
+                    </Badge>
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-purple-700 transition-colors">
                     {item.title}
@@ -364,17 +350,18 @@ export default function Portfolio() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {item.tools.map((tool, toolIndex) => (
-                      <span
+                      <Badge
                         key={tool}
-                        className="text-xs px-3 py-1 border border-purple-200 text-purple-700 rounded-full hover:bg-purple-50 transition-colors transform hover:scale-105"
+                        variant="outline"
+                        className="text-xs hover:bg-purple-50 border-purple-200 text-purple-700 transition-colors transform hover:scale-105"
                         style={{ animationDelay: `${toolIndex * 50}ms` }}
                       >
                         {tool}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -390,19 +377,19 @@ export default function Portfolio() {
                 Areej Hussain
               </h3>
               <p className="text-slate-300 animate-slide-up animation-delay-200">
-                Digital Portfolio
+                Digital Portfolioo
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-6 text-sm">
-              <div className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors cursor-pointer">
+              <div className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors">
                 <Mail className="w-4 h-4" />
                 <span>areejhwahid@gmail.com</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors cursor-pointer">
+              <div className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors">
                 <Phone className="w-4 h-4" />
                 <span>+960 9132605</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-300 hover:text-blue-300 transition-colors cursor-pointer">
+              <div className="flex items-center gap-2 text-slate-300 hover:text-blue-300 transition-colors">
                 <Linkedin className="w-4 h-4" />
                 <span>linkedin.com/in/areejhussain</span>
               </div>
