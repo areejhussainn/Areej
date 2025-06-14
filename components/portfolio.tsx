@@ -57,10 +57,9 @@ export default function Portfolio() {
   const portfolioItems = [
     {
       id: 1,
-      title: "Brand Identity Package",
+      title: "Brand Identity Design",
       category: "Logo Variations",
-      image:
-        "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&h=400&fit=crop",
+      image: "images/logos.png",
       tools: ["Illustrator", "Photoshop"],
       description:
         "Complete brand identity with logo variations and guidelines",
@@ -68,10 +67,9 @@ export default function Portfolio() {
     },
     {
       id: 2,
-      title: "Booklet Page Samples",
+      title: "Booklet Page Sample",
       category: "Booklets",
-      image:
-        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop",
+      image: "images/page.png",
       tools: ["InDesign", "Illustrator"],
       description:
         "Professional booklet layouts with modern typography and design",
@@ -79,43 +77,30 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: "Social Media Graphics",
-      category: "Graphic Works",
-      image:
-        "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      tools: ["Canva", "Photoshop"],
-      description: "Engaging social media post designs and templates",
-      color: "from-orange-500 to-red-500",
+      title: "Logo Design Concepts",
+      category: "Logo Variations",
+      image: "images/2.jpg",
+      tools: ["Illustrator", "Canva"],
+      description: "Multiple logo concepts and variations for tech startup",
+      color: "from-violet-500 to-purple-500",
     },
     {
       id: 4,
       title: "Restaurant Menu Design",
       category: "Booklets",
-      image:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop",
+      image: "images/mne-2.png",
       tools: ["InDesign", "Illustrator"],
       description: "Elegant menu design with typography focus",
       color: "from-blue-500 to-indigo-500",
     },
     {
       id: 5,
-      title: "Logo Design Concepts",
-      category: "Logo Variations",
-      image:
-        "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&h=400&fit=crop",
-      tools: ["Illustrator", "Canva"],
-      description: "Multiple logo concepts and variations for tech startup",
-      color: "from-violet-500 to-purple-500",
-    },
-    {
-      id: 6,
-      title: "Digital Marketing Assets",
+      title: "Social Media Graphics",
       category: "Graphic Works",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      image: "images/4.jpg",
       tools: ["Canva", "Photoshop"],
-      description: "Comprehensive digital marketing graphics and banners",
-      color: "from-cyan-500 to-blue-500",
+      description: "Engaging social media post designs and templates",
+      color: "from-orange-500 to-red-500",
     },
   ];
 
@@ -322,7 +307,7 @@ export default function Portfolio() {
           </div>
 
           {/* Portfolio Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-2 gap-10">
             {filteredItems.map((item, index) => (
               <div
                 key={item.id}
@@ -333,7 +318,7 @@ export default function Portfolio() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-90 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div
                     className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-0 group-hover:opacity-20 transition-all duration-500`}
