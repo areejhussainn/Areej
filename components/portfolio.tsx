@@ -338,12 +338,7 @@ export default function Portfolio() {
                   <div
                     className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-0 group-hover:opacity-20 transition-all duration-500`}
                   ></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <button className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-slate-900 hover:bg-slate-100 px-4 py-2 rounded-lg flex items-center gap-2 font-medium">
-                      <ExternalLink className="w-4 h-4" />
-                      View Project
-                    </button>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center"></div>
                   <div
                     className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}
                   ></div>
