@@ -83,7 +83,7 @@ export default function Portfolio() {
       id: 4,
       title: "Restaurant Menu Design",
       category: "Booklets",
-      image: "images/5.png",
+      image: "images/Untitled-2.png",
       tools: ["Canva", "Illustrator"],
       color: "from-blue-500 to-indigo-500",
     },
